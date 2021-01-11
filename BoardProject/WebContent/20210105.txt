@@ -1,0 +1,7 @@
+board project
+
+<%=request.getContextPath() %>추가
+
+깃허브 연동
+
+
