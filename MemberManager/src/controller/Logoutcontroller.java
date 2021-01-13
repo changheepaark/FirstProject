@@ -5,13 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.ModelAndView;
 
-public class Logoutcontroller implements Controller {
+public class LogoutController implements Controller {
 
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().invalidate();
 		return new ModelAndView("main.jsp", true);
-		
 	}
 
 }
