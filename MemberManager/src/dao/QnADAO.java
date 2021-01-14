@@ -41,7 +41,7 @@ public class QnADAO {
 	}
 	//개인 문의 목록을 조회
 	public ArrayList<QnaDTO> selectQnaList(String id, int pageNo){
-		String sql = "select * from (select ceil(rownum / 5) as page, qno, title, content, wdate, writer, status, response from (select * from qna where writer = ? order by qno desc)) where page = ?";
+		String sql = "select * from (select ceil(rownum / 5) as page, qno, title, content, wdate, writer, status, nvl(response,'입력된 답변이 없습니다') from (select * from qna where writer = ? order by qno desc)) where page = ?";
 		ArrayList<QnaDTO> list = new ArrayList<QnaDTO>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -78,6 +78,26 @@ public class QnADAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return list;
+	}
+
+	public ArrayList<QnaDTO> selectNoAnswerList() {
+		String sql = "select * from qna where status in(0,1)";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<QnaDTO> list = new ArrayList<QnaDTO>();
+		try {
+			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(new QnaDTO(rs.getInt(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 		return list;
 	}
 

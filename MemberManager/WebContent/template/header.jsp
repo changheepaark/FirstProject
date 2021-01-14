@@ -48,6 +48,7 @@
 			{
 				%>
 				<li><a href="member_manage_main.jsp">전체 회원 관리</a></li>
+				<li><a href="qnaAdminView.do">회원문의내역</a></li>
 				 
 				<%	
 			}
