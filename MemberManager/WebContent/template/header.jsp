@@ -51,10 +51,11 @@
 				<li><a href="qnaAdminView.do">회원문의내역</a></li>
 				 
 				<%	
-			}
+			}else{
 		%>
-		<li><a href="updateView.do">회원정보수정</a></li>
 		<li><a href="qnaView.do">문의하기</a></li>
+		<%} %>
+		<li><a href="updateView.do">회원정보수정</a></li>
 	</ul>
 	<div id="login">
 		<table>

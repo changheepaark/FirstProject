@@ -39,7 +39,15 @@ public class HandlerMapping {
 		case "nextQnaList.do":
 			controller = new NextQnaListController();
 			break;
-			
+		case "qnaAdminView.do":
+			controller = new QnaAdminViewController();
+			break;
+		case "adminQnaDetailView.do":
+			controller = new QnaAdminDetailViewController();
+			break;
+		case "answer.do":
+			controller = new ResponeUpdateController();
+			break;
 			
 		}
 		return controller;
