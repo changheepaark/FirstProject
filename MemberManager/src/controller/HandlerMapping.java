@@ -48,7 +48,21 @@ public class HandlerMapping {
 		case "answer.do":
 			controller = new ResponeUpdateController();
 			break;
-			
+		case "main.do":
+			controller = new MainMoveController();
+			break;
+		case "boardWriteView.do":
+			controller = new BoardWriteViewController();
+			break;
+		case "loginView.do":
+			controller = new LoginViewController();
+			break;
+		case "boardWriteAction.do":
+			controller = new BoardWriteController();
+			break;
+		case "boardView.do":
+			controller = new BoardViewController();
+			break;
 		}
 		return controller;
 	}
