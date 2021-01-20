@@ -125,7 +125,7 @@
 		$(".comment_form button").click(function(){
 			var data = $("#comment").serialize();
 			$.ajax({
-				url : "process/comment_insert_process.jsp",
+				url : "insertComment.do",
 				data : data,
 				method:"get",
 				success:function(d){
@@ -138,20 +138,24 @@
 			// 0 - like, 1 - hate
 			// bno;
 			var obj = $(this);
-			d = "bno=${request.board.bno}&mode="+$(this).index();
+			d = "bno=${requestScope.board.bno}&mode="+$(this).index();
 			$.ajax({
-				url : "process/board_like_hate_process.jsp",
+				url : "plusLikeHate.do",
 				data : d,
 				method : "get",
 				success:function(result){
 					result = result.trim();
+					if(result == "false"){
+						alert("로그인후 이용하실 수 있습니다.");
+						location.href="${pageContext.request.contextPath}/loginView.do";
+					}
 					console.log(result, result.length);
 					$(obj).children("span").html(result);
 					
 				},
 				error : function(request, status, error) {
 					alert(request.responseText.trim());
-					location.href="${pageContext.request.contextPath}/member/login.jsp";
+					location.href="${pageContext.request.contextPath}/loginView.do";
 					
 				}
 			});
@@ -205,6 +209,19 @@
 					</td>
 				</tr>
 				<tr>
+					<td colspan="2">
+						첨부파일<br>
+						<c:forEach var="f" items="${requestScope.file }">
+							<a href="filedownload.jsp?writer=${f.writer }&file=${f.fileName}">
+							${f.fileName}</a><br>
+							<!-- 해당 파일이 이미지인지? -->
+							<c:if test="${f.type =='image' }">
+								<img src="imageLoad.do?writer=${f.writer }&file=${f.fileName}&type=${f.type}">
+							</c:if>
+						</c:forEach>
+					</td>
+				</tr>
+				<tr>
 					<td colspan="2" class="text_center">
 						<a href="#" class="btn_like">
 							<img src="${pageContext.request.contextPath }/img/like.png">
@@ -239,7 +256,7 @@
 					<td style="text-align: right;">
 					<c:if test="${sessionScope.id == requestScope.board.writer }">
 						<a href="#" class="btn">수정</a>
-						<a href="#" class="btn">삭제</a>
+						<a href="deleteBoard.do?bno=${requestScope.board.bno }" class="btn">삭제</a>
 					</c:if>
 						<a href="#" class="btn">이전글</a>
 						<a href="#" class="btn">다음글</a>

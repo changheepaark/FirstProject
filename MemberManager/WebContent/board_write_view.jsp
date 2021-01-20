@@ -8,7 +8,6 @@
 <title>글쓰기 페이지</title>
 <style type="text/css">
 	#container{
-		height: 600px;
 		/* background-color: lime; */
 		width:1200px;
 		margin:0 auto;
@@ -61,6 +60,9 @@
 		resize: none;
 		box-sizing: border-box;
 	}
+	p input{
+		width:80% !important;
+	}
 </style>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -70,7 +72,7 @@
 		$("#plus").click(function(){
 			if(count == 5) return;
 			count++;
-			$("#frm").append("<p><input type='file' name='file"+count+"'></p>");
+			$("#file_form").append("<p><input type='file' name='file"+count+"'></p>");
 		});
 		$("#minus").click(function(){
 			if(count == 1) return;
@@ -111,9 +113,7 @@
 				</tr>
 				<!-- 첨부 파일 -->
 				<tr>
-					<td colspan="2">
-						<p><input type="text" name="writer" placeholder="작성자"></p>
-						<p><button>전송</button></p>
+					<td colspan="2" id="file_form">
 						<p><input type="file" name="file1"> 
 						<button type="button" id="plus">+</button> <button type="button" id="minus">-</button></p>
 						<p><input type="file" name="file2"></p>

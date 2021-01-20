@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.BoardDTO;
 import dto.CommentDTO;
+import dto.FileDTO;
 import model.ModelAndView;
 import service.BoardService;
 
@@ -20,8 +21,16 @@ public class BoardViewController implements Controller {
 			request.setAttribute("board", board);
 			ArrayList<CommentDTO> list = BoardService.getInstance().selectCommentDTO(bno);
 			request.setAttribute("comment", list);
+			ArrayList<FileDTO> fList = BoardService.getInstance().selectFileList(bno);
+			request.setAttribute("file", fList);
 		}
 		return new ModelAndView("board_detail_view.jsp", false);
 	}
 
 }
+
+
+
+
+
+
